@@ -13,6 +13,8 @@ export default function FilterScreen() {
   const { filters, applyFilters } = useTrends()
   const [draft, setDraft] = useState({ ...filters })
   const [districtSearch, setDistrictSearch] = useState('')
+  const [districtLimitHit, setDistrictLimitHit] = useState(false)
+  const MAX_DISTRICTS = 5
 
   const propertyTypes = draft.marketType === 'Rent' ? PROPERTY_TYPES_RENT : PROPERTY_TYPES_SALE
 
@@ -30,16 +32,21 @@ export default function FilterScreen() {
   )
 
   function toggleDistrict(id) {
-    setDraft(d => ({
-      ...d,
-      districts: d.districts.includes(id)
-        ? d.districts.filter(x => x !== id)
-        : [...d.districts, id]
-    }))
+    setDraft(d => {
+      if (d.districts.includes(id)) {
+        return { ...d, districts: d.districts.filter(x => x !== id) }
+      }
+      if (d.districts.length >= MAX_DISTRICTS) {
+        setDistrictLimitHit(true)
+        setTimeout(() => setDistrictLimitHit(false), 2500)
+        return d
+      }
+      return { ...d, districts: [...d.districts, id] }
+    })
   }
 
   function selectAll() {
-    setDraft(d => ({ ...d, districts: DISTRICTS.map(x => x.id) }))
+    setDraft(d => ({ ...d, districts: DISTRICTS.map(x => x.id).slice(0, MAX_DISTRICTS) }))
   }
 
   function handleApply() {
@@ -122,8 +129,35 @@ export default function FilterScreen() {
 
         {/* DISTRICTS */}
         <Section title="Districts (D1–D28)" action={
-          <button onClick={selectAll} className="text-era-red text-[12px] font-semibold">Select All</button>
+          <div className="flex items-center gap-2">
+            <span className={`text-[11px] font-semibold px-2 py-0.5 rounded-full ${
+              draft.districts.length >= MAX_DISTRICTS
+                ? 'bg-era-red text-white'
+                : 'bg-gray-100 text-gray-500'
+            }`}>
+              {draft.districts.length}/{MAX_DISTRICTS}
+            </span>
+            <button
+              onClick={selectAll}
+              disabled={draft.districts.length >= MAX_DISTRICTS}
+              className={`text-[12px] font-semibold transition-opacity ${
+                draft.districts.length >= MAX_DISTRICTS
+                  ? 'text-gray-300 cursor-not-allowed'
+                  : 'text-era-red'
+              }`}
+            >
+              Select 5
+            </button>
+          </div>
         }>
+          {/* Limit toast */}
+          {districtLimitHit && (
+            <div className="flex items-center gap-2 bg-red-50 border border-red-200 text-era-red text-[12px] font-medium px-3 py-2 rounded-xl mb-3 animate-pulse">
+              <span>⚠️</span>
+              <span>Max 5 districts — remove one to add another</span>
+            </div>
+          )}
+
           {/* Search */}
           <div className="relative mb-3">
             <Search size={15} className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
@@ -137,22 +171,33 @@ export default function FilterScreen() {
 
           {/* District chips */}
           <div className="flex flex-wrap gap-2 max-h-40 overflow-y-auto hide-scrollbar">
-            {filteredDistricts.map(d => (
-              <button
-                key={d.id}
-                onClick={() => toggleDistrict(d.id)}
-                className={`px-3 py-1.5 rounded-full text-[12px] font-semibold transition-all ${
-                  draft.districts.includes(d.id)
-                    ? 'bg-era-red text-white shadow-sm'
-                    : 'bg-gray-100 text-gray-600'
-                }`}
-              >
-                {d.id}
-              </button>
-            ))}
+            {filteredDistricts.map(d => {
+              const isSelected = draft.districts.includes(d.id)
+              const isDisabled = !isSelected && draft.districts.length >= MAX_DISTRICTS
+              return (
+                <button
+                  key={d.id}
+                  onClick={() => toggleDistrict(d.id)}
+                  className={`px-3 py-1.5 rounded-full text-[12px] font-semibold transition-all ${
+                    isSelected
+                      ? 'bg-era-red text-white shadow-sm'
+                      : isDisabled
+                        ? 'bg-gray-100 text-gray-300 cursor-not-allowed'
+                        : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+                  }`}
+                >
+                  {d.id}
+                </button>
+              )
+            })}
           </div>
           {draft.districts.length > 0 && (
-            <p className="text-[11px] text-gray-400 mt-2">{draft.districts.length} selected</p>
+            <p className="text-[11px] text-gray-400 mt-2">
+              {draft.districts.length} of {MAX_DISTRICTS} districts selected
+              {draft.districts.length >= MAX_DISTRICTS && (
+                <span className="text-era-red font-semibold"> · Max reached</span>
+              )}
+            </p>
           )}
         </Section>
 
