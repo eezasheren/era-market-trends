@@ -4,6 +4,8 @@ import TrendsEmpty from './pages/TrendsEmpty'
 import FilterScreen from './pages/FilterScreen'
 import ResultsScreen from './pages/ResultsScreen'
 import ChartScreen from './pages/ChartScreen'
+import SampleReports from './pages/SampleReports'
+import SampleReportDetail from './pages/SampleReportDetail'
 import Dashboard from './pages/Dashboard'
 import Listings from './pages/Listings'
 import AIInsights from './pages/AIInsights'
@@ -20,6 +22,8 @@ export default function App() {
         <Route path="/trends/filter" element={<FilterScreen />} />
         <Route path="/trends/results" element={<ResultsScreen />} />
         <Route path="/trends/chart" element={<ChartScreen />} />
+        <Route path="/trends/sample-reports" element={<SampleReports />} />
+        <Route path="/trends/sample-reports/:id" element={<SampleReportDetail />} />
         <Route path="/insights" element={<AIInsights />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="*" element={<Navigate to="/dashboard" replace />} />

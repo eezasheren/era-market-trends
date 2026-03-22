@@ -55,8 +55,11 @@ export default function TrendsEmpty() {
             </button>
           )}
 
-          <button className="mt-3 text-gray-400 text-[13px] font-medium">
-            View Sample Reports
+          <button
+            onClick={() => navigate('/trends/sample-reports')}
+            className="mt-3 text-era-red text-[13px] font-semibold underline underline-offset-2 active:opacity-70 transition-opacity"
+          >
+            View Sample Reports →
           </button>
         </div>
 
