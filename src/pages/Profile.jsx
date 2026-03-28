@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { ChevronRight, Star, Award, Phone, Mail, Globe, Bell, Shield, HelpCircle, LogOut, Camera, Edit3, Copy } from 'lucide-react'
+import { ChevronRight, Star, Award, Phone, Mail, Globe, Bell, Shield, HelpCircle, LogOut, Camera, Edit3, Copy, Search } from 'lucide-react'
 import BottomNav from '../components/BottomNav'
 
 const STATS = [
@@ -45,9 +45,31 @@ export default function Profile() {
 
   return (
     <div className="flex flex-col min-h-screen bg-[#F2F2F7]">
+      {/* Top bar */}
+      <header className="sticky top-0 z-40 bg-white border-b border-gray-100">
+        <div className="flex items-center justify-between px-4 py-3">
+          <div className="flex items-center gap-2.5">
+            <div className="w-9 h-9 rounded-full bg-gradient-to-br from-era-red to-[#B01827] flex items-center justify-center text-white text-[12px] font-extrabold shadow-sm flex-shrink-0">AG</div>
+            <div>
+              <div className="text-[10px] text-gray-400 leading-none mb-0.5">Alex Goh</div>
+              <div className="text-[16px] font-bold text-era-navy leading-none">My Profile</div>
+            </div>
+          </div>
+          <div className="flex items-center gap-1.5">
+            <button className="w-9 h-9 flex items-center justify-center rounded-full bg-gray-100 active:bg-gray-200 transition-colors">
+              <Search size={17} className="text-gray-600" />
+            </button>
+            <button className="w-9 h-9 flex items-center justify-center rounded-full bg-gray-100 active:bg-gray-200 transition-colors relative">
+              <Bell size={17} className="text-gray-600" />
+              <span className="absolute top-1.5 right-1.5 w-2 h-2 bg-era-red rounded-full border-2 border-white" />
+            </button>
+          </div>
+        </div>
+      </header>
+
       <main className="flex-1 overflow-y-auto pb-24 page-enter">
         {/* Profile hero */}
-        <div className="bg-gradient-to-b from-white to-[#F2F2F7] px-4 pt-10 pb-6">
+        <div className="bg-gradient-to-b from-white to-[#F2F2F7] px-4 pt-6 pb-6">
           {/* Avatar */}
           <div className="flex flex-col items-center">
             <div className="relative mb-4">

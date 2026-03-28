@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Search, SlidersHorizontal, Heart, MapPin, Bed, Bath, Square, ChevronRight, Plus } from 'lucide-react'
+import { Search, SlidersHorizontal, Heart, MapPin, Bed, Bath, Square, ChevronRight, Plus, Bell } from 'lucide-react'
 import BottomNav from '../components/BottomNav'
 
 const TABS = ['All', 'Active', 'Sold', 'Rental']
@@ -73,12 +73,23 @@ export default function Listings() {
     <div className="flex flex-col min-h-screen bg-[#F2F2F7]">
       {/* Header */}
       <header className="sticky top-0 z-40 bg-white border-b border-gray-100">
-        <div className="flex items-center justify-between px-4 pt-3 pb-2">
-          <h1 className="text-[20px] font-extrabold text-era-navy">My Listings</h1>
-          <button className="flex items-center gap-1.5 bg-era-red text-white text-[12px] font-bold px-3 py-2 rounded-xl">
-            <Plus size={14} />
-            Add
-          </button>
+        <div className="flex items-center justify-between px-4 py-3">
+          <div className="flex items-center gap-2.5">
+            <div className="w-9 h-9 rounded-full bg-gradient-to-br from-era-red to-[#B01827] flex items-center justify-center text-white text-[12px] font-extrabold shadow-sm flex-shrink-0">AG</div>
+            <div>
+              <div className="text-[10px] text-gray-400 leading-none mb-0.5">Alex Goh</div>
+              <div className="text-[16px] font-bold text-era-navy leading-none">My Listings</div>
+            </div>
+          </div>
+          <div className="flex items-center gap-1.5">
+            <button className="w-9 h-9 flex items-center justify-center rounded-full bg-gray-100 active:bg-gray-200 transition-colors">
+              <Search size={17} className="text-gray-600" />
+            </button>
+            <button className="w-9 h-9 flex items-center justify-center rounded-full bg-gray-100 active:bg-gray-200 transition-colors relative">
+              <Bell size={17} className="text-gray-600" />
+              <span className="absolute top-1.5 right-1.5 w-2 h-2 bg-era-red rounded-full border-2 border-white" />
+            </button>
+          </div>
         </div>
 
         {/* Search */}

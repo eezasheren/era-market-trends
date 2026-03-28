@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { Zap, TrendingUp, TrendingDown, Users, Bell, ChevronRight, BarChart2, ArrowUpRight, Sparkles, MessageSquare } from 'lucide-react'
+import { Zap, TrendingUp, TrendingDown, Users, Bell, ChevronRight, BarChart2, ArrowUpRight, Sparkles, MessageSquare, Search } from 'lucide-react'
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, LineChart, Line } from 'recharts'
 import BottomNav from '../components/BottomNav'
 
@@ -48,12 +48,21 @@ export default function AIInsights() {
       {/* Header */}
       <header className="sticky top-0 z-40 bg-white border-b border-gray-100">
         <div className="flex items-center justify-between px-4 py-3">
-          <div>
-            <h1 className="text-[20px] font-extrabold text-era-navy">AI Insights</h1>
-            <p className="text-[11px] text-gray-400">Powered by ERA Intelligence</p>
+          <div className="flex items-center gap-2.5">
+            <div className="w-9 h-9 rounded-full bg-gradient-to-br from-era-red to-[#B01827] flex items-center justify-center text-white text-[12px] font-extrabold shadow-sm flex-shrink-0">AG</div>
+            <div>
+              <div className="text-[10px] text-gray-400 leading-none mb-0.5">Alex Goh</div>
+              <div className="text-[16px] font-bold text-era-navy leading-none">AI Insights</div>
+            </div>
           </div>
-          <div className="w-9 h-9 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-full flex items-center justify-center shadow-sm">
-            <Sparkles size={16} className="text-white" />
+          <div className="flex items-center gap-1.5">
+            <button className="w-9 h-9 flex items-center justify-center rounded-full bg-gray-100 active:bg-gray-200 transition-colors">
+              <Search size={17} className="text-gray-600" />
+            </button>
+            <button className="w-9 h-9 flex items-center justify-center rounded-full bg-gray-100 active:bg-gray-200 transition-colors relative">
+              <Bell size={17} className="text-gray-600" />
+              <span className="absolute top-1.5 right-1.5 w-2 h-2 bg-era-red rounded-full border-2 border-white" />
+            </button>
           </div>
         </div>
 
