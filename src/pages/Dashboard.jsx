@@ -12,12 +12,12 @@ const NEWS_ITEMS = [
 ]
 
 const CATEGORIES = [
-  { icon: '🏠', label: 'Buy', sub: ['Condo', 'HDB', 'Landed', 'EC', 'New Launch'], color: '#FFF0F1', accent: '#D41F30' },
-  { icon: '💰', label: 'Sell', sub: ['List Property', 'Valuation', 'Market Report', 'Agent Match', 'Timeline'], color: '#FFF7ED', accent: '#EA580C' },
-  { icon: '🔑', label: 'Rent', sub: ['Condo', 'HDB', 'Landed', 'Commercial', 'Short Term'], color: '#EFF6FF', accent: '#2563EB' },
-  { icon: '🏢', label: 'Commercial', sub: ['Office', 'Retail', 'Industrial', 'F&B', 'Warehouse'], color: '#F0FDF4', accent: '#16A34A' },
-  { icon: '✨', label: 'New Launch', sub: ['OCR Projects', 'CCR Projects', 'RCR Projects', 'ECs', 'Upcoming'], color: '#FDF4FF', accent: '#9333EA' },
-  { icon: '📊', label: 'Investment', sub: ['ROI Analysis', 'Rental Yield', 'Capital Growth', 'Portfolio', 'Foreign'], color: '#FFFBEB', accent: '#D97706' },
+  { icon: '🏠', label: 'Buy',        sub: ['Condo', 'HDB', 'Landed', 'EC', 'New Launch'],                       color: '#FDE3E7', accent: '#C8102E' },
+  { icon: '💰', label: 'Sell',       sub: ['List Property', 'Valuation', 'Market Report', 'Agent Match', 'Timeline'], color: '#FFF7ED', accent: '#EA580C' },
+  { icon: '🔑', label: 'Rent',       sub: ['Condo', 'HDB', 'Landed', 'Commercial', 'Short Term'],               color: '#E3DBFA', accent: '#250E62' },
+  { icon: '🏢', label: 'Commercial', sub: ['Office', 'Retail', 'Industrial', 'F&B', 'Warehouse'],               color: '#DCFEEE', accent: '#048848' },
+  { icon: '✨', label: 'New Launch', sub: ['OCR Projects', 'CCR Projects', 'RCR Projects', 'ECs', 'Upcoming'],  color: '#FDF4FF', accent: '#9333EA' },
+  { icon: '📊', label: 'Investment', sub: ['ROI Analysis', 'Rental Yield', 'Capital Growth', 'Portfolio', 'Foreign'], color: '#FEF9EB', accent: '#F6BC2F' },
 ]
 
 const QUICK_STATS = [
@@ -27,10 +27,10 @@ const QUICK_STATS = [
 ]
 
 const RECENT_ACTIVITY = [
-  { type: 'listing', text: 'New listing matched: 3BR at Orchard Residences', time: '2m ago', dot: '#D41F30' },
-  { type: 'deal', text: 'Deal closed: $1.85M at Tampines St 86', time: '1h ago', dot: '#16A34A' },
-  { type: 'insight', text: 'AI Alert: D15 prices up 8% — 3 clients match', time: '3h ago', dot: '#2563EB' },
-  { type: 'listing', text: 'Viewing scheduled: Clementi Ave 3 unit', time: '5h ago', dot: '#EA580C' },
+  { type: 'listing', text: 'New listing matched: 3BR at Orchard Residences', time: '2m ago', dot: '#C8102E' },
+  { type: 'deal',    text: 'Deal closed: $1.85M at Tampines St 86',           time: '1h ago', dot: '#048848' },
+  { type: 'insight', text: 'AI Alert: D15 prices up 8% — 3 clients match',   time: '3h ago', dot: '#250E62' },
+  { type: 'listing', text: 'Viewing scheduled: Clementi Ave 3 unit',          time: '5h ago', dot: '#F6BC2F' },
 ]
 
 export default function Dashboard() {
@@ -79,7 +79,7 @@ export default function Dashboard() {
 
       <main className="flex-1 overflow-y-auto pb-24">
         {/* Hero banner */}
-        <div className="mx-4 mt-4 rounded-2xl overflow-hidden relative bg-gradient-to-br from-era-red to-[#B01827] p-4 shadow-lg shadow-era-red/20">
+        <div className="mx-4 mt-4 rounded-2xl overflow-hidden relative bg-gradient-to-br from-era-red to-era-red-dark p-4 shadow-lg shadow-era-red/20">
           <div className="absolute right-0 top-0 bottom-0 w-32 opacity-10">
             <svg viewBox="0 0 100 100" className="w-full h-full" fill="white">
               <circle cx="80" cy="20" r="40" /><circle cx="60" cy="70" r="30" />
@@ -122,7 +122,7 @@ export default function Dashboard() {
         {/* MAP+ Featured */}
         <div className="px-4 mt-4">
           <button
-            className="w-full bg-gradient-to-r from-[#1A1A2E] to-[#2D2D4E] rounded-2xl p-4 shadow-lg flex items-center justify-between"
+            className="w-full bg-gradient-to-r from-era-navy to-[#3F18AA] rounded-2xl p-4 shadow-lg shadow-era-navy/30 flex items-center justify-between"
             onClick={() => {}}
           >
             <div className="flex items-center gap-3">
@@ -145,20 +145,20 @@ export default function Dashboard() {
 
         {/* AI Copilot */}
         <div className="px-4 mt-3">
-          <div className="bg-gradient-to-r from-blue-50 to-indigo-50 border border-blue-100 rounded-2xl p-4">
+          <div className="bg-gradient-to-r from-era-blue-light to-[#C8B8F5] border border-[#9475EB]/20 rounded-2xl p-4">
             <div className="flex items-center justify-between mb-2">
               <div className="flex items-center gap-2">
-                <div className="w-7 h-7 bg-blue-500 rounded-full flex items-center justify-center">
+                <div className="w-7 h-7 rounded-full flex items-center justify-center" style={{ background: '#250E62' }}>
                   <Zap size={13} className="text-white" />
                 </div>
-                <span className="text-[13px] font-bold text-blue-800">AI Copilot</span>
+                <span className="text-[13px] font-bold" style={{ color: '#250E62' }}>AI Copilot</span>
               </div>
-              <button onClick={() => navigate('/insights')} className="text-[11px] text-blue-600 font-semibold">View All</button>
+              <button onClick={() => navigate('/insights')} className="text-[11px] font-semibold" style={{ color: '#3F18AA' }}>View All</button>
             </div>
-            <p className="text-[12px] text-blue-700 leading-relaxed">
+            <p className="text-[12px] leading-relaxed" style={{ color: '#1E0B50' }}>
               📍 <strong>3 of your clients</strong> are looking in D15 — prices up 8% this quarter. <strong>Good time to reach out.</strong>
             </p>
-            <button onClick={() => navigate('/insights')} className="mt-2.5 flex items-center gap-1.5 bg-blue-600 text-white text-[12px] font-semibold px-3 py-2 rounded-xl">
+            <button onClick={() => navigate('/insights')} className="mt-2.5 flex items-center gap-1.5 text-white text-[12px] font-semibold px-3 py-2 rounded-xl" style={{ background: '#250E62' }}>
               <Zap size={12} />
               See AI Recommendations
             </button>
